@@ -26,18 +26,35 @@
   .memo-field-value input[type="date"] { width: 100%; font-family: 'Noto Sans JP', sans-serif; font-size: 14px; padding: 8px; border: 1px solid #ccc; border-radius: 3px; outline: none; background: transparent; cursor: pointer; }
   .memo-field-value input[type="date"]:focus { border-color: #888; }
 
-  .memo-row4 { display: flex; align-items: center; min-height: 40px; }
-  .memo-row4-label { font-weight: 700; font-size: 13px; padding: 8px 12px; white-space: nowrap; }
-  .memo-row4-value { flex: 1; padding: 0 4px; border-left: 1px solid #111; }
-  .memo-row4-value:last-child { }
-  .memo-row4-value input[type="text"] { width: 100%; font-family: 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 700; padding: 6px 8px; border: none; outline: none; background: transparent; }
-  .memo-row4-value select { width: 100%; font-family: 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 700; padding: 6px 8px; border: none; outline: none; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23666' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; }
-  .memo-row4-value input[type="date"] { width: 100%; font-family: 'Noto Sans JP', sans-serif; font-size: 14px; padding: 6px 8px; border: none; outline: none; background: transparent; cursor: pointer; }
+  .memo-row4 { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr); }
+  .memo-row4-label { display: flex; align-items: center; font-weight: 700; font-size: 16px; padding: 8px 12px; white-space: nowrap; }
+  .memo-row4-value { padding: 0 4px; border-left: 1px solid #111; }
+  .memo-row4-value select, .memo-row4-value input[type="date"] {
+    width: 100%;
+    min-height: 56px;
+    font: 700 20px 'Noto Sans JP', sans-serif;
+    color: inherit;
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+  .memo-row4-value select {
+    padding-right: 28px;
+    appearance: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%23666' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 10px center;
+  }
   .memo-row4-label:nth-child(3) { border-left: 1px solid #111; }
+
+  @media screen and (max-width: 520px) {
+    .memo-row4 { grid-template-columns: max-content minmax(0, 1fr); }
+    .memo-row4-label:nth-child(3) { border-left: none; }
+    .memo-row4 > :nth-child(n + 3) { border-top: 1px solid #111; }
+  }
 
   .memo-section-label { font-weight: 700; font-size: 13px; padding: 10px 16px 4px; }
   .memo-content { padding: 4px 16px 8px; }
-  .memo-content textarea { width: 100%; font-family: 'Noto Sans JP', sans-serif; font-size: 14px; line-height: 2; min-height: 180px; padding: 8px; border: none; outline: none; resize: vertical; background: transparent; }
+  .memo-content textarea { width: 100%; font-family: 'Noto Sans JP', sans-serif; font-size: calc(14px + 2pt); line-height: 2; min-height: 180px; padding: 8px; border: none; outline: none; resize: vertical; background: transparent; }
 
   .memo-check-area { padding: 12px 16px; }
   .memo-check-item { font-size: 14px; margin-bottom: 2px; line-height: 1.8; }
@@ -76,7 +93,7 @@
   </div>
   <div class="memo-sep"></div>
   <div class="memo-row4">
-    <div class="memo-row4-label">担　当</div>
+    <label class="memo-row4-label" for="assignee">担　当</label>
     <div class="memo-row4-value"><select id="assignee" class="assignee-select">
       <option value="">（選択）</option>
       <option value="井上梨花">井上梨花</option>
@@ -86,8 +103,9 @@
       <option value="森下日向">森下日向</option>
       <option value="湊孝治">湊孝治</option>
       <option value="吉松卓也">吉松卓也</option>
+      <option value="増野">増野</option>
     </select></div>
-    <div class="memo-row4-label">期　限</div>
+    <label class="memo-row4-label" for="deadlineDate">期　限</label>
     <div class="memo-row4-value"><input type="date" id="deadlineDate"></div>
   </div>
   <div class="memo-sep"></div>
